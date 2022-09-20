@@ -1,0 +1,36 @@
+{% extends "defaut.html" %}
+{% block head %}
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/defaut.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>Acceuil</title>
+{% endblock head %}
+{% block content %}
+
+<div class="formulaire">
+  {% if error %}
+    <h2 class="titre-page" style="color:red">{{error}}</h2>
+  {% endif %}
+  <div class="titre-page">
+  </div>
+  <form method="POST" action="/">
+    <div class="ligne">
+      <div class="champ-input">
+        <input type="text" id="arrondissement" name="arrondissement" placeholder="Entrez un arrondissement" value={{request.form["auteur"]}}>
+      </div>
+  </div>
+  <div class="ligne">
+      <button type="submit">Soumettre</button>
+  </div>
+  </form>
+  <main class="container m-auto max-w-2xl mt-4 p-2 sm:px-8">
+    <input type="recherche" id="recherche" placeholder="Chercher une installation..." class="appearance-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 rounded-lg text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />     
+    <div class="my-4 shadow rounded-lg overflow-hidden">
+      <table class="items min-w-full leading-normal"></table>
+    </div>
+  </main>
+  <script src="/static/scripts/recherche.js"></script>
+</div>
+{%endblock content%}

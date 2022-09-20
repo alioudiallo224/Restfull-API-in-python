@@ -1,0 +1,20 @@
+{% extends "defaut.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/defaut.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/info.css') }}">
+<title>informations_installation</title>
+{% endblock head %}
+{% block content %}
+<h2 align="center">INFORMATION </h2>
+<div class="row">
+    <div class="column">
+        <div class="card">
+            {% for info_installation in info_installations %}
+                <p align="center">
+                    {{info_installation}} : {{info_installations[info_installation]}}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

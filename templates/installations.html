@@ -1,0 +1,28 @@
+{% extends "defaut.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/defaut.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/info.css') }}">
+<title>Installaions_arrondissement</title>
+{% endblock head %}
+{% block content %}
+<h2 align="center">INSTALLATIONS</h2>
+<table border="1" align="center">
+  <tbody>
+    {% for piscine in arrondissements['piscines'] %}
+    <tr>
+      <td>{{piscine[0]}}</td>
+    </tr>
+    {% endfor %}
+    {% for glissade in arrondissements['glissades'] %}
+    <tr>
+      <td>{{glissade[0]}}</td>
+    </tr>
+    {% endfor %}
+    {% for patinoire in arrondissements['patinoires'] %}
+    <tr>
+      <td>{{patinoire[0]}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

@@ -1,0 +1,230 @@
+#%RAML 1.0
+title: Projet de session INF5190
+baseUri: http://127.0.0.1:5000
+version: 1.0
+types:
+  Installations:
+    properties:
+      arrondissement:
+        type: string
+        required: true
+      piscines:
+        type: []
+        required: true
+      glissades:
+        type: []
+        required: true
+      patinoires:
+        type: []
+        required: true
+  All-installations:
+    properties:
+      installation:
+        type: string
+        required: true
+      cathegorie:
+        type: string
+        required: true
+  Schema_glissade:
+    properties:
+      nom:
+        type: string
+        required: true
+      nom_arr:
+        type: string
+        required: true
+      cle:
+        type: string
+        required: true
+      date_maj:
+        type: string
+        required: true
+      ouvert:
+        type: number
+        required: true
+      deblaye:
+        type: number
+        required: true
+      condition:
+        type: string
+        required: true
+      type_installation:
+        type: string
+        required: False
+  Piscine:
+    properties:
+      id_uesv:
+        type: string
+        required: true
+      type:
+        type: string
+        required: true
+      nom:
+        type: string
+        required: true
+      nom_arr:
+        type: string
+        required: true
+      adresse:
+        type: string
+        required: true
+      propriete:
+        type: string
+        required: true
+      gestion:
+        type: string
+        required: true
+      point_x:
+        type: number
+        required: true
+      point_y:
+        type: number
+        required: true
+      equipement:
+        type: string
+        required: true
+      long:
+        type: number
+        required: true
+      lat:
+        type: number
+        required: true
+      type_installation:
+        type: string
+        required: False
+  Patinoire:
+    properties:
+      nom_arr:
+        type: string
+        required: true
+      nom:
+        type: string
+        required: true
+      type_installation:
+        type: string
+        required: true
+/api:
+  /supprimer-glissade:
+    delete:
+      description: Supprimer une glissade
+      queryParameters:
+        glissade:
+          type: string
+          description: glissade a supprimee
+      responses:
+        200:
+          description: Suppression reussi
+        404:
+          description: Echec de la suppression
+  /info-installation:
+    get:
+      description: Extraire les informations connues sur une installation.
+      queryParameters:
+        nom:
+          type: string
+          description: nom de l'installation
+        type:
+          type: string
+          description: type de l'installation
+      responses:
+        200:
+          body:
+            description: Information d'une installation
+            application/json:
+              type: ExistingPerson[]
+        404:
+          description: Aucune information trouvee
+  /type-installations_json:
+    get:
+      description: Extraire la liste de toutes les installaions.
+      responses:
+        200:
+          body:
+            description: Toutes les installations sont extraites
+            application/json:
+              type: [Patinoire, Schema_glissade, Piscine]
+  /type-installations_xml:
+    get:
+      description: Extraire la liste de toute les installations.
+      responses:
+        200:
+          description: Toutes les installations sont extraites
+          body:
+            application/xml:
+              type: xml
+  /type-installations_csv:
+    get:
+      description: Extraire la liste de toutes les installations.
+      responses:
+        200:
+          description: Toutes les installations sont extraites
+          body:
+            application/csv:
+              type: csv
+  /installations:
+    get:
+      description: Extraire les installation d'un arrondissement.
+      queryParameters:
+        arrondissement:
+          type: string
+          description: arrondissement a extraire
+      responses:
+        200:
+          body:
+            application/json:
+              type: Installations[]
+        404:
+          description: Aucune installation trouvee
+  /all-installations:
+    get:
+      description: Extraire toutes les installations.
+      responses:
+        200:
+          body:
+            application/json:
+              type: All-installations[]
+  /glissade:
+    put:
+      description: Modifier une glissade.
+      body:
+        application/json:
+          type: Schema_glissade
+          example:
+            "nom" : "Aire de glissade, Ahuntsic",
+            "nom_arr" : "Ahuntsic - Cartierville",
+            "cle" : "ahc",
+            "date_maj" : "2022-03-06 12:13:43",
+            "ouvert" : 1,
+            "deblaye" : "1",
+            "condition" : "Bonne"
+      responses:
+        202:
+          description: Modification reussi.
+          body:
+            application/json:
+              type: Schema_glissade
+          example:
+            "nom" : "Aire de glissade, Ahuntsic",
+            "nom_arr" : "Ahuntsic - Cartierville",
+            "cle" : "ahc",
+            "date_maj" : "2022-03-06 12:13:43",
+            "ouvert" : 1,
+            "deblaye" : "1",
+            "condition" : "Bonne"
+        404:
+          description: Echec de la modification
+  /une-glissade:
+    get:
+      description: Extraire une glissade.
+      queryParameters:
+        glissade:
+          type: string
+          description: glissade a extraire
+      responses:
+        200:
+          body:
+            description: La glissade extraite avec succes au format json
+            application/json:
+              type: Schema_glissade
+        404:
+          description: Aucune information trouvee

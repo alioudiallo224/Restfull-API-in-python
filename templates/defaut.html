@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/defaut.css') }}">
+    <title>{% block title %}{% endblock %} defaut</title>
+    {% endblock %}
+</head>
+<body>
+
+<div class="navigateur">
+    <a class="logo"  href="/">
+        <h3>projetsession <span>H22</span></h3>
+    </a>
+    {% block ajouter %}
+    {% endblock %}
+</div>
+{% block content %}
+{% endblock %}
+<footer>
+    <div class="footer-bottom">
+        <p>copyright &copy;2022 <a href="#">projetdesession-INF5190-H2022 programmation web avancé</a></p>
+    </div>
+    </div>
+</footer>
+</body>
+</html>

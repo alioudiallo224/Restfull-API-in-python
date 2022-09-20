@@ -1,0 +1,16 @@
+{% extends "defaut.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/defaut.css') }}">
+<title>informations_installation</title>
+{% endblock head %}
+{% block content %}
+<h2 align="center">INFORMATION</h2>
+{% for patinoires in all_patinoires %}
+    {% for patinoire in patinoires %}  
+        <p align="center">
+            {{patinoire}} : {{patinoires[patinoire]}}
+        </p>
+    {% endfor %}
+    <br/>
+{% endfor %}
+{% endblock content %}
